@@ -2,52 +2,78 @@
 <!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
 <html lang="en">
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <title>eMercado - Todo lo que busques está aquí</title>
-
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <style>
-    html, body{
-      height: 100%;
-    }
-
-    body {
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-align: center;
-      align-items: center;
-      padding-top: 40px;
-      padding-bottom: 40px;
-      background-color: #f5f5f5;
-    }
-
-    .signin {
-      width: 100%;
-      max-width: 330px;
-      padding: 15px;
-      margin: auto;
-    }
+  <head>
+        
+  <meta charset="utf-8">
+  <meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+  <title> Formulario de Acceso </title>    
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Videojuegos & Desarrollo">
+  <meta name="description" content="Muestra de un formulario de acceso en HTML y CSS">
+  <meta name="keywords" content="Formulario Acceso, Formulario de LogIn">
+  
+  <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  
+  <!-- Link hacia el archivo de estilos css -->
+  <link rel="stylesheet" href="css/login.css">
+  
+  <style type="text/css">
+      
   </style>
+  
+  <script type="text/javascript">
+  
+  </script>
+  
 </head>
 
-<body class="text-center">
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 1 (Fecha de entrega: 08/08/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>
-  </div>
+<body>
+  <div align="right" class="image-fondo cabecera"></div>
+  <div align="left" id="contenedor">
+      <div id="central">
+          <div id="login">
+              <div class="titulo">
+                  Bienvenido
+              </div>
+              <form id="loginform">
+                  <input type="text" name="usuario" placeholder="Usuario" required>
+                  
+                  <input type="password" placeholder="Contraseña" name="password" required>
+                  
+                  <button type="submit" title="Ingresar" name="Ingresar">Login</button>
+              </form>
+              <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+<script>
+function onSignIn(googleUser) {
+  // Useful data for your client-side scripts:
+  var profile = googleUser.getBasicProfile();
+  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+  console.log('Full Name: ' + profile.getName());
+  console.log('Given Name: ' + profile.getGivenName());
+  console.log('Family Name: ' + profile.getFamilyName());
+  console.log("Image URL: " + profile.getImageUrl());
+  console.log("Email: " + profile.getEmail());
 
-  <script src="js/init.js"></script>
-  <script src="js/login.js"></script>
-</body>
+  // The ID token you need to pass to your backend:
+  var id_token = googleUser.getAuthResponse().id_token;
+  console.log("ID Token: " + id_token);
+}
+</script>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+<!--<div class="pie-form">
+                 <a href="#">¿Perdiste tu contraseña?</a>
+                  <a href="#">¿No tienes Cuenta? Registrate</a> 
+              </div>
+          </div>
+          <div class="inferior">
+              <a href="#">Volver</a>-->
+          </div>
+      </div>
+  </div>
 </html>
