@@ -17,7 +17,7 @@
   <meta name="keywords" content="Formulario Acceso, Formulario de LogIn">
   
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet"> 
-  <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
+
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   
   <!-- Link hacia el archivo de estilos css -->
@@ -46,8 +46,11 @@
                   
                   <input type="password" placeholder="Contraseña" name="password" required>
                   
-                  <button type="submit" title="Ingresar" name="Ingresar" >Login</button>
-                  <!-- <input type="submit" value="Enviar" onclick="red()" />-->
+                  <!-- <form method="get" action="index.html">
+                    <button type="submit">Continue
+                   </form>
+                  <input type="submit" value="Enviar" onclick="red()" />-->
+                  <input type="submit" name="button" id="button" value="Ingresar" onclick="location.href = 'index.html' ">
               </form>
               <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 <script>

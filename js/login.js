@@ -5,6 +5,4 @@ document.addEventListener("DOMContentLoaded", function(e);
 function red() { 
    location.href = "index.html"; 
 }
-
-
 });
