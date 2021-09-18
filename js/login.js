@@ -1,45 +1,19 @@
-$(document).ready(function(){    
-   $('#boton-guardar').click(function(){        
-       /*Captura de datos escrito en los inputs*/        
-       var nom = document.getElementById("nombretxt").value;
-       var apel = document.getElementById("apellidotxt").value;
-       /*Guardando los datos en el LocalStorage*/
-       localStorage.setItem("Nombre", nom);
-       localStorage.setItem("Apellido", apel);
-       /*Limpiando los campos o inputs*/
-       document.getElementById("nombretxt").value = "";
-       document.getElementById("apellidotxt").value = "";
-   });   
-});
+function guardar(dato, pass){  
+    
+  if (dato.trim()==="" || pass.trim()===""){ //Chequea que el dato recibido no esté vacío. 
+  //El método trim elimina los espacios en blanco al inicio y al final del mismo.
+      alert("El dato está vacío");
+  }    else{
+  localStorage.setItem("usuario", dato.trim()); //setItem almacena el dato en la posición "usuario"
+  localStorage.setItem("password", pass.trim()); // Almaceno la contraseña
+  sessionStorage.setItem("usuario", dato.trim());
+  alert (" Usuario : " + dato); 
+  
+ 
+  location.href="index.html";
+  
+  //getItem obtiene el dato almacenado en la posición "usuario"
+ 
+  }
+}
 
-/*Funcion Cargar y Mostrar datos*/
-$(document).ready(function(){    
-   $('#boton-cargar').click(function(){                       
-       /*Obtener datos almacenados*/
-       var nombre = localStorage.getItem("Nombre");
-       var apellido = localStorage.getItem("Apellido");
-       /*Mostrar datos almacenados*/      
-       document.getElementById("nombre").innerHTML = nombre;
-       document.getElementById("apellido").innerHTML = apellido; 
-   });   
-});
-function getUserInformation() {
-   const userInformation = JSON.parse(localStorage.getItem("userInformation"));
-   if (!userInformation) {
-     localStorage.setItem(
-       "userInformation",
-       JSON.stringify({
-         name: "Jhon",
-         lastname: "Doe",
-         adress: "No Doe Address",
-       })
-     );
-   }
- 
-   const h1Element = document.querySelector(".user-name");
- 
-   h1Element.textContent = `Hola ${userInformation.name}`;
- }
- 
- window.addEventListener("load", getUserInformation);
- 
