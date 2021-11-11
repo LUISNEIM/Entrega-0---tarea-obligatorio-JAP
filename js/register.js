@@ -1,7 +1,6 @@
-const domSelectors = {
+const domElements = {
     form: 'form.signin',
     submitButton: 'button[type="submit"]',
-    demoLogin: '#demo-login',
     emailInput: 'input[name="email"]',
     pwdInput: 'input[name="password"]',
     errorElement: '#error-element',
@@ -11,22 +10,22 @@ const domSelectors = {
 
 const errorMessages = {
     'auth/invalid-email': 'Email inválido',
+    'auth/email-already-in-use': 'Ese email ya ha sido registrado',
     'auth/wrong-password': 'Datos incorrectos',
+    'auth/weak-password': 'La contraseña debe contener al menos 6 caracteres',
     'auth/user-not-found': 'Datos incorrectos',
-    'auth/too-many-requests': 'Demasiados intentos, intente más tarde',
+    'auth/too-many-requests': 'Demasiados intentos, pruebe más tarde',
 };
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener('DOMContentLoaded', function () {
-    selectDomElements(domSelectors, (element, idx) => {
+    selectDomElements(domElements, (element, idx) => {
         window[idx] = element;
     });
 
     form.addEventListener('submit', onSubmit);
-
-    demoLogin.addEventListener('click', onDemoLogin);
 });
 
 function onSubmit(e) {
@@ -47,28 +46,17 @@ function onSubmit(e) {
 
     if (!hasErrors) {
         loadingOn();
-        login(emailInput.value, pwdInput.value);
+
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(emailInput.value, pwdInput.value)
+            .catch(function (error) {
+                loadingOff();
+
+                console.log(error.code, error.message);
+                showError(errorMessages[error.code] || 'Formulario inválido');
+            });
     }
-}
-
-function onDemoLogin() {
-    demoLogin.style.backgroundColor = '#EEE';
-    demoLogin.style.boxShadow = '0px 0px 2px #AAA';
-    login('demo@demo.com', '123456');
-}
-
-function login(email, password) {
-    firebase
-        .auth()
-        .signInWithEmailAndPassword('demo@demo.com', '123456')
-        .then(() => {
-            loadingOff();
-        })
-        .catch(function (error) {
-            loadingOff();
-
-            showError(errorMessages[error.code] || 'Error');
-        });
 }
 
 function showError(message) {
